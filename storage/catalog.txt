@@ -1,0 +1,15 @@
+Dune, Frank Herbert, FANTASY, 90
+Ender's Game, Orson Scott Card, FANTASY, 85
+Foundation, Isaac Asimov, FANTASY, 95
+The Hobbit, J.R.R. Tolkien, FANTASY, 80
+Harry Potter and the Philosopher's Stone, J.K). Rowling, FANTASY, 75
+Rich Dad Poor Dad, Robert T. Kiyosaki, FINANCE, 65
+The Intelligent Investor, Benjamin Graham, FINANCE, 70
+Freakonomics, Steven D. Levitt, FINANCE, 75
+The Richest Man in Babylon, George S. Clason, FINANCE, 60
+The Millionaire Next Door, Thomas J. Stanley, FINANCE, 55
+The Adventures of Sherlock Holmes, Arthur Conan Doyle, DETECTIVE, 70
+Murder on the Orient Express, Agatha Christie, DETECTIVE, 75
+The Big Sleep, Raymond Chandler, DETECTIVE, 65
+The Girl with the Dragon Tattoo, Stieg Larsson, DETECTIVE, 80
+Gone Girl, Gillian Flynn, DETECTIVE, 85

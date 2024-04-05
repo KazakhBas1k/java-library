@@ -4,8 +4,9 @@ import org.example.Book;
 import org.example.Catalog;
 import org.example.enums.Genre;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,5 +27,21 @@ public class CatalogService {
             Logger.getLogger(CatalogService.class.getName()).log(Level.SEVERE, null, exception);
         }
         return catalog;
+    }
+
+    public void updateCatalog(Catalog catalog) {
+        List<Book> bookList = catalog.getBooks();
+        List<String> lines = new ArrayList<>();
+        for (Book book : bookList) {
+            lines.add(book.toString());
+        }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("storage/catalog.txt"))) {
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

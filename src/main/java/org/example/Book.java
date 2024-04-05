@@ -42,6 +42,6 @@ public class Book implements Readable {
     }
     @Override
     public String toString() {
-        return this.title + " by " + this.author + " (" + this.genre + ") - $" + this.price;
+        return this.title + " , " + this.author + ", " + this.genre + ", " + this.price;
     }
 }

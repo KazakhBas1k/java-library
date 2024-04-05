@@ -33,7 +33,11 @@ public class UserService {
                 index = i;
             }
         }
-        return users.get(index);
+        if (index > users.size()) {
+            return null;
+        } else {
+            return users.get(index);
+        }
     }
 
     public boolean isNameValid(String username) {

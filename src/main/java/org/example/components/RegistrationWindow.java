@@ -37,15 +37,19 @@ public class RegistrationWindow extends JFrame {
         registerButton.addActionListener(e -> {
             String username = nameField.getText();
             String password = passwordField.getText();
-            if (this.userService.isNameValid(username)) {
-                Customer customer = new Customer(username, password);
-                this.userService.createCustomer(customer);
-                JOptionPane.showMessageDialog(null, "User " + username + " welcome!");
-                CatalogWindow catalogWindow = new CatalogWindow(customer);
-                catalogWindow.setVisible(true);
-                dispose();
+            if (username.equals("") || password.equals("")) {
+                JOptionPane.showMessageDialog(null, "Fill all Rows");
             } else {
-                JOptionPane.showMessageDialog(null, "Username is already used!");
+                if (this.userService.isNameValid(username)) {
+                    Customer customer = new Customer(username, password);
+                    this.userService.createCustomer(customer);
+                    JOptionPane.showMessageDialog(null, "User " + username + " welcome!");
+                    CatalogWindow catalogWindow = new CatalogWindow(customer);
+                    catalogWindow.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username is already used!");
+                }
             }
         });
 

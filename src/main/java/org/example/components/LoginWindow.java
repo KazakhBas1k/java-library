@@ -1,5 +1,6 @@
 package org.example.components;
 
+import org.example.Admin;
 import org.example.Customer;
 import org.example.User;
 import org.example.services.UserService;
@@ -37,15 +38,32 @@ public class LoginWindow extends JFrame {
         loginButton.addActionListener(e -> {
             String username = nameField.getText();
             String password = passwordField.getText();
-            User userByUsername = this.userService.getUserByUsername(username);
-            if (userByUsername.getPassword().equals(password)) {
-                Customer customer = new Customer(username, password);
-                JOptionPane.showMessageDialog(null, "User " + username + " welcome!");
-                CatalogWindow catalogWindow = new CatalogWindow(customer);
-                catalogWindow.setVisible(true);
-                dispose();
+            if (username.equals("") || password.equals("")) {
+                JOptionPane.showMessageDialog(null, "Fill all rows!");
+            } else if (username.equals("admin")) {
+                Admin admin = new Admin();
+                if (password.equals(admin.getPassword())) {
+                    AdminCatalogWindow adminCatalogWindow = new AdminCatalogWindow(admin);
+                    adminCatalogWindow.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong Password");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Wrong Password");
+                User userByUsername = this.userService.getUserByUsername(username);
+                if (userByUsername != null) {
+                    if (userByUsername.getPassword().equals(password)) {
+                        Customer customer = new Customer(username, password);
+                        JOptionPane.showMessageDialog(null, "User " + username + " welcome!");
+                        CatalogWindow catalogWindow = new CatalogWindow(customer);
+                        catalogWindow.setVisible(true);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Wrong Password");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "User not found!");
+                }
             }
         });
 

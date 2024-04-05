@@ -29,10 +29,12 @@ public class BookAddEditWindow extends JFrame {
         genre = new JComboBox<>(Genre.values());
         price = new JTextField(15);
         done = new JButton("Done");
-        title.setText(selectedBook.getTitle());
-        author.setText(selectedBook.getAuthor());
-        genre.setSelectedItem(selectedBook.getGenre());
-        price.setText(Double.toString(selectedBook.getPrice()));
+        if (action.equals(Action.EDIT)) {
+            title.setText(selectedBook.getTitle());
+            author.setText(selectedBook.getAuthor());
+            genre.setSelectedItem(selectedBook.getGenre());
+            price.setText(Double.toString(selectedBook.getPrice()));
+        }
 
         done.addActionListener(e -> {
             String titleInput = title.getText();
@@ -41,11 +43,11 @@ public class BookAddEditWindow extends JFrame {
             String priceInput = price.getText();
             if (action.equals(Action.ADD)) {
                 Book book = new Book(titleInput, authorInput, selectedGenre, Double.parseDouble(priceInput));
-                admin.addBook(book);
+                BookAddEditWindow.admin.addBook(book);
                 dispose();
             } else if (action.equals(Action.EDIT)) {
                 Book book = new Book(titleInput, authorInput, selectedGenre, Double.parseDouble(priceInput));
-                admin.editBook(selectedBook, book);
+                BookAddEditWindow.admin.editBook(selectedBook, book);
                 dispose();
             }
         });

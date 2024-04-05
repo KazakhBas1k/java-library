@@ -24,6 +24,7 @@ public class AdminCatalogWindow extends JFrame {
     public JButton deleteButton;
     public JButton editButton;
     public JButton addButton;
+    public JButton refresh;
     public AdminCatalogWindow(Admin admin) {
         AdminCatalogWindow.admin = admin;
         setTitle("Catalog");
@@ -48,13 +49,14 @@ public class AdminCatalogWindow extends JFrame {
         deleteButton = new JButton("Delete book");
         editButton = new JButton("Edit Book");
         addButton = new JButton("Add book");
+        refresh = new JButton("Refresh");
         deleteButton.addActionListener(e -> {
             Book selectedBook = bookList.getSelectedValue();
             if (selectedBook != null) {
                 int option = JOptionPane.showConfirmDialog(this, "Do you want to delete " + selectedBook.getTitle() + "?", "Confirmation", JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     bookListModel.removeElement(selectedBook);
-                    admin.deleteBook(selectedBook);
+                    AdminCatalogWindow.admin.deleteBook(selectedBook);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Please select a book to delete.");
@@ -62,7 +64,7 @@ public class AdminCatalogWindow extends JFrame {
         });
         addButton.addActionListener(e -> {
             Book selectedBook = bookList.getSelectedValue();
-            BookAddEditWindow bookAddEditWindow = new BookAddEditWindow(Action.ADD, admin, selectedBook);
+            BookAddEditWindow bookAddEditWindow = new BookAddEditWindow(Action.ADD, AdminCatalogWindow.admin, selectedBook);
             bookAddEditWindow.setVisible(true);
         });
 
@@ -71,7 +73,7 @@ public class AdminCatalogWindow extends JFrame {
             if (selectedBook != null) {
                 int option = JOptionPane.showConfirmDialog(this, "Do you want to edit?", "Confirmation", JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
-                    BookAddEditWindow bookAddEditWindow = new BookAddEditWindow(Action.EDIT, admin, selectedBook);
+                    BookAddEditWindow bookAddEditWindow = new BookAddEditWindow(Action.EDIT, AdminCatalogWindow.admin, selectedBook);
                     bookAddEditWindow.setVisible(true);
                 }
             } else {
@@ -79,9 +81,16 @@ public class AdminCatalogWindow extends JFrame {
             }
         });
 
+        refresh.addActionListener(e -> {
+            bookListModel.clear();
+            AdminCatalogWindow.admin.getCatalog().getBooks().forEach(bookListModel::addElement);
+            bookList.repaint();
+        });
+
         controlPanel.add(deleteButton);
         controlPanel.add(addButton);
         controlPanel.add(editButton);
+        controlPanel.add(refresh);
 
         panel.add(controlPanel);
         add(panel);

@@ -27,4 +27,8 @@ public class Admin extends User {
         catalog.deleteBook(book);
         this.catalogService.updateCatalog(catalog);
     }
+
+    public Catalog getCatalog() {
+        return catalog;
+    }
 }
